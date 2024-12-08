@@ -40,10 +40,9 @@ function buildCharts(sample) {
 
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-
+  // Don't forget to slice and reverse the input data appropriately
 
     // Build a Bar Chart
-    // Don't forget to slice and reverse the input data appropriately
 
 
     // Render the Bar Chart
