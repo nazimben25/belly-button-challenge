@@ -91,16 +91,16 @@ function buildCharts(sample) {
                                           color: otu_ids,
                                           colorscale: "Portland",
                                           type : "heatmap"
-                                }
+                                         }
                               }
                               ];
 
     const Layout_bubblechart = {
-                          title: "Bacteria Cultures Per Sample",
-                          xaxis: { title: "OTU ID"},
-                          yaxis: { title: "Number of bacteries" },
-                          hovermode: "closest"
-                        };
+                                title: "Bacteria Cultures Per Sample",
+                                xaxis: { title: "OTU ID"},
+                                yaxis: { title: "Number of bacteries" },
+                                hovermode: "closest"
+                                };
 
     // Render the Bubble Chart
 
@@ -177,11 +177,11 @@ function init() {
                               arrow.append("option").text(Names[i]).property("value", Names[i]);
                               }
     
-    // Get the first sample from the list names. it will be by default 940
+    // Get the first sample from the list names. BY DEFAULT 940
 
     const choice = Names[0];
 
-    // Build charts and metadata panel with the first sample. it will be by default 940 
+    // Build charts and metadata panel with the first sample. BY DEFAULT 940 
 
     buildCharts(choice);
     buildMetadata(choice);
