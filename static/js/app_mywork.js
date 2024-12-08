@@ -9,6 +9,7 @@ function buildMetadata(sample) {
     const metadata = data.metadata;
 
     // Filter the metadata for the object with the desired sample number
+
     const resultObj = metadata.filter(metaObj => metaObj.id == sample)
     
     // extract 1st row of the resultobj
@@ -25,14 +26,15 @@ function buildMetadata(sample) {
     panel.html("");
 
     // Append key-value pairs to the panel
-    // for loop on the obj panel, retriec key + value and append them to object h6 in the panel 
+    // for loop on the obj panel, retriec key + value and append them to object 'h6' in the panel 
     // use h6 for the size in line with the example of instructions
 
     for (let [key, value] of Object.entries(result)) 
 
-      // print in consol to check the values expected
-        {console.log(`content of the panel is ${key}: ${value}`)
-        panel.append("h6").text(`${key}: ${value}`);}
+          // print in consol to check the values expected
+            {console.log(`content of the panel is ${key}: ${value}`)
+            panel.append("h6").text(`${key}: ${value}`);}
+        
 
     
 
@@ -49,9 +51,11 @@ function buildMetadata(sample) {
     
 }
 
-// check functin  buildMetadata. test with 940
+// TO USE FOR CTRL : check functin  buildMetadata. test with 940
 buildMetadata(940);
 
+
+// function to build both charts
 
 function buildCharts(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
@@ -77,19 +81,19 @@ function buildCharts(sample) {
     // Build a Bubble Chart
 
     const Data_bubblechart = [
-                          {
-                            x: otu_ids,
-                            y: sample_values,
-                            text: otu_labels,
-                            mode: "markers",
-                            marker: {
-                                      size: sample_values,
-                                      color: otu_ids,
-                                      colorscale: "Portland",
-                                      type : "heatmap"
-                            }
-                          }
-                        ];
+                              {
+                                x: otu_ids,
+                                y: sample_values,
+                                text: otu_labels,
+                                mode: "markers",
+                                marker: {
+                                          size: sample_values,
+                                          color: otu_ids,
+                                          colorscale: "Portland",
+                                          type : "heatmap"
+                                }
+                              }
+                              ];
 
     const Layout_bubblechart = {
                           title: "Bacteria Cultures Per Sample",
@@ -103,8 +107,8 @@ function buildCharts(sample) {
     Plotly.newPlot("bubble", Data_bubblechart, Layout_bubblechart);
 
         
-     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-  // Don't forget to slice and reverse the input data appropriately
+    // For the Bar Chart, map the otu_ids to a list of strings for your yticks
+    // Don't forget to slice and reverse the input data appropriately
 
     const yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
 
@@ -145,8 +149,7 @@ function buildCharts(sample) {
     });
   }
 
-// check functin  buildCharts. test with 940
-
+// TO USE FOR CTRL : check functin  buildCharts. test with 940
 buildCharts(940)
 
 
@@ -162,7 +165,7 @@ function init() {
     const Names = data.names;
 
     // Use d3 to select the dropdown with id of `#selDataset` 
-    // select id="selDataset" onchange="optionChanged(this.value)"></select>
+        // select id="selDataset" onchange="optionChanged(this.value)"></select>
 
     const arrow = d3.select("#selDataset");
 
@@ -171,20 +174,22 @@ function init() {
     // option for each sample name.
 
     for (let i = 0; i < Names.length; i++) {
-      arrow.append("option").text(Names[i]).property("value", Names[i]);
-      }
+                              arrow.append("option").text(Names[i]).property("value", Names[i]);
+                              }
     
-    // Get the first sample from the list
+    // Get the first sample from the list names. it will be by default 940
 
     const choice = Names[0];
 
-    // Build charts and metadata panel with the first sample
+    // Build charts and metadata panel with the first sample. it will be by default 940 
 
     buildCharts(choice);
     buildMetadata(choice);
   });
-}
+  }
 
+  // TO USE FOR CTRL : check functin  buildCharts. test will be by default 940
+init();
 
 function optionChanged(newSample) {
   
@@ -194,4 +199,5 @@ function optionChanged(newSample) {
   buildMetadata(newSample);
 }
 
+// Initialize the dashboard
 init();
