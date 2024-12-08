@@ -103,13 +103,34 @@ function buildCharts(sample) {
     Plotly.newPlot("bubble", Data_bubblechart, Layout_bubblechart);
 
         
- // For the Bar Chart, map the otu_ids to a list of strings for your yticks
+     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
   // Don't forget to slice and reverse the input data appropriately
+
+    const yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
 
     // Build a Bar Chart
 
+    const Data_barchart = [
+                            {
+                            // Don't forget to slice and reverse the input data appropriately
+                              x: sample_values.slice(0, 10).reverse(),
+                              y: yticks,
+                              text: otu_labels.slice(0, 10).reverse(),
 
-    // Render the Bar Chart
+                              type: "bar",
+                              orientation: "h"
+                            }
+                          ];
+
+    const Layout_barchart = {
+                            title: "Top 10 Bacteria Cultures Found",
+                            xaxis: { title: "Number o bacteries" }
+                            };
+
+  // Render the Bar Chart
+
+  Plotly.newPlot("bar", Data_barchart, Layout_barchart);
+
 
 
     // checks in console
@@ -121,18 +142,12 @@ function buildCharts(sample) {
 
     // console.log(`result of panel is `);
     // console.log(panel);
-  });
-}
+    });
+  }
 
 // check functin  buildCharts. test with 940
 
 buildCharts(940)
-
-
-
-
-
-
 
 
 
