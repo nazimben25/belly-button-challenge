@@ -31,7 +31,7 @@ function buildMetadata(sample) {
     for (let [key, value] of Object.entries(result)) 
 
       // print in consol to check the values expected
-      {console.log(`content of the panel is ${key}: ${value}`)
+        {console.log(`content of the panel is ${key}: ${value}`)
         panel.append("h6").text(`${key}: ${value}`);}
 
     
@@ -52,35 +52,89 @@ function buildMetadata(sample) {
 // check functin  buildMetadata. test with 940
 buildMetadata(940);
 
-// // function to build both charts
-// function buildCharts(sample) {
-//   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
-//     // Get the samples field
+function buildCharts(sample) {
+  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+    
+    // Get the samples field
+
+    const samples = data.samples;
+
+    // Filter the samples for the object with the desired sample number
+
+    const resultObj = samples.filter(samples => samples.id == sample)
+    
+    // extract 1st row of the resultobj
+  
+    const result = resultObj[0];
+
+    // Get the otu_ids, otu_labels, and sample_values, and store them in Const
+
+    const otu_ids = result.otu_ids;
+    const otu_labels = result.otu_labels;
+    const sample_values = result.sample_values;
+
+    // Build a Bubble Chart
+
+    const Data_bubblechart = [
+                          {
+                            x: otu_ids,
+                            y: sample_values,
+                            text: otu_labels,
+                            mode: "markers",
+                            marker: {
+                                      size: sample_values,
+                                      color: otu_ids,
+                                      colorscale: "Portland",
+                                      type : "heatmap"
+                            }
+                          }
+                        ];
+
+    const Layout_bubblechart = {
+                          title: "Bacteria Cultures Per Sample",
+                          xaxis: { title: "OTU ID"},
+                          yaxis: { title: "Number of bacteries" },
+                          hovermode: "closest"
+                        };
+
+    // Render the Bubble Chart
+
+    Plotly.newPlot("bubble", Data_bubblechart, Layout_bubblechart);
+
+        
+ // For the Bar Chart, map the otu_ids to a list of strings for your yticks
+  // Don't forget to slice and reverse the input data appropriately
+
+    // Build a Bar Chart
 
 
-//     // Filter the samples for the object with the desired sample number
+    // Render the Bar Chart
 
 
-//     // Get the otu_ids, otu_labels, and sample_values
+    // checks in console
+
+    console.log(`sample buildCharts is ${sample}`);
+
+    console.log(`result of buildCharts is `);
+    console.log(result);
+
+    // console.log(`result of panel is `);
+    // console.log(panel);
+  });
+}
+
+// check functin  buildCharts. test with 940
+
+buildCharts(940)
 
 
-//     // Build a Bubble Chart
 
 
-//     // Render the Bubble Chart
 
 
-//     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-//   // Don't forget to slice and reverse the input data appropriately
-
-//     // Build a Bar Chart
 
 
-//     // Render the Bar Chart
-
-//   });
-// }
 
 // // Function to run on page load
 // function init() {
