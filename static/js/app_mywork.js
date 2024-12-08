@@ -40,7 +40,7 @@ function buildMetadata(sample) {
     console.log(`metadata is `);
     console.log(metadata);
 
-    console.log(`result of sample is `);
+    console.log(`result of metadata is `);
     console.log(result);
 
     console.log(`result of panel is `);
@@ -49,7 +49,8 @@ function buildMetadata(sample) {
     
 }
 
-buildMetadata();
+// check functin  buildMetadata. test with 940
+buildMetadata(940);
 
 // // function to build both charts
 // function buildCharts(sample) {
