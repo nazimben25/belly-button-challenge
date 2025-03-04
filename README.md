@@ -1,4 +1,8 @@
-# belly-button-challenge
+# using Plotly, a JavaScript data visualization library
+# build an interactive dashboard to explore the Belly Button Biodiversity datasetLinks to an external site, which catalogs the microbes that colonize human navels
+
+
+### belly-button-challenge
 challenge module 14
 
 OUTPUT OF THE CHALLENGE 14
